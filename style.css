@@ -1,0 +1,62 @@
+*{
+    background-color: rgb(255, 255, 255);
+    font: 1em sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-size: 30px;
+    color: cornflowerblue;
+}
+
+.container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+           
+}
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+#btn-adicionar{
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#btn-adicionar :hover{
+    background-color: #9ec5ff;
+}
+
+
+#contador {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;               
+  margin: 20px 0;
+}
+
+
+#filtros {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;               
+}
+#filtros button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#filtros button:hover {
+  background-color: #9ec5ff;
+}

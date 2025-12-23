@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   
+    <h1>Gerenciador de tarefas</h1>
+    
+    <div class="container">
+    <input type="text" id="input-tarefa" placeholder="Digite uma nova tarefa">
+    <button id="btn-adicionar">Adicionar</button>
+    </div>
+
+
+    <div id="contador">
+        <p>Total: <span id="Total">0</span></p>
+        <p>Pendentes: <span id="pendentes">0</span></p>
+        <p>Concluidas: <span id="concluidas">0</span></p>
+    </div>
+
+    <div id="filtros">
+        <button id="filtro-todas">Todas</button>
+        <button id="filtro-pendentes">Pendentes</button>
+        <button id="filtro-concluidas">Concluidas</button>
+    </div>
+   
+    
+    <ul id="lista-tarefas">
+    </ul>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
