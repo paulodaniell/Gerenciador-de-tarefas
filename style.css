@@ -12,7 +12,8 @@ h1{
 .container {
   display: flex;
   justify-content: center; 
-  align-items: center;     
+  align-items: center;    
+  gap: 10px;
            
 }
 input {
@@ -59,4 +60,44 @@ input {
 }
 #filtros button:hover {
   background-color: #9ec5ff;
+}
+#lista-tarefas {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#lista-tarefas li {
+  background: #ffffff;
+  border: 1px solid #000000;
+  padding: 12px;
+  margin-bottom: 10px;    /* espaço entre os quadrados */
+  border-radius: 10px;
+  font-size: 30px;
+  font-family: Arial;
+  width: 50%;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#lista-tarefas li:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+#lista-tarefas li.pendente{
+  
+  color: #000000;
+  background-color: rgb(250, 192, 0);
+  text-align: center;
+}
+
+
+#lista-tarefas li.concluida{
+  
+  color: #000000;
+  background-color: #15cf40;
+  text-align: center;
 }
