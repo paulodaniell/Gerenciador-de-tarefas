@@ -13,6 +13,28 @@ let contadorTotal = 0;
 let contadorPend = 0;
 let contadorCon = 0;
 
+
+function salvarTarefas(){
+  const liTarefas = lista.querySelectorAll('li');
+  const listaDeTaredas = [];
+
+  for(let tarefa of liTarefas){
+    let tarefaTexto = tarefa.innerText;
+    tarefaTexto = tarefaTexto.replace('Apagar','').trim();
+    listaDeTaredas.push(tarefaTexto);
+  }
+  const tarefasJSON= JSON.stringify(listaDeTaredas)
+  console.log(tarefasJSON);
+  localStorage.setItem('lista',tarefasJSON);
+}
+
+function adicionaTarefasSalvas(){
+  const lista =localStorage.getItem('lista');
+  const listaDeTaredas = JSON.parse(lista);
+  for(let tarefa of listaDeTaredas){
+    criarTarefa(tarefa);
+  }
+}
 function criarBotaoApagar(li){
 
   li.innerText += ' ';
@@ -22,18 +44,16 @@ function criarBotaoApagar(li){
   li.appendChild(botaoApagar);
   
   botaoApagar.addEventListener("click",(e)=>{
-    console.log("botao apagar");
     e.stopPropagation();
     li.remove(); 
+    salvarTarefas();
     contadorTotal--;
     if (li.classList.contains("concluida")) {
     contadorCon--;
     } else {
     contadorPend--;
 }
-  concluida.textContent = contadorCon;
-  pendente.textContent = contadorPend;
-  total.textContent = contadorTotal;
+    atualizarContadores();
 
     });
 }
@@ -43,20 +63,52 @@ function criaLi() {
   return li;
 }
 
+function atualizarContadores() {
+  total.textContent = contadorTotal;
+  pendente.textContent = contadorPend;
+  concluida.textContent = contadorCon;
+}
+
+function mostrarHora() {
+    const data = new Date();
+    
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+
+    const horaMinuto = data.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    return `${dia}/${mes} às ${horaMinuto}`;
+}
+function limpainput(){
+  nameTarefa.value = "";
+  focus(nameTarefa);
+}
+
+
 function criarTarefa(textoInput){
+  
   const li = criaLi();
-  li.innerText = textoInput;
+ if (textoInput.includes("(Criada:")) {
+    li.innerText = textoInput;
+  } else {
+    const hora = mostrarHora();
+    li.innerText = `${textoInput} (Criada: ${hora})`;
+  }
+  
   li.classList.add("pendente");
   lista.appendChild(li);
   criarBotaoApagar(li);
-  nameTarefa.value = "";
+  limpainput();
+  salvarTarefas();
+
   contadorTotal++;
   contadorPend++;
-  total.textContent = contadorTotal;
-  pendente.textContent = contadorPend;
+  atualizarContadores();
   li.addEventListener("click",()=>{
   marcarTarefa(li);
-  
   });
 }
 
@@ -76,8 +128,7 @@ function marcarTarefa(li){
   contadorPend++;
   contadorCon--;
 }
-  pendente.textContent = contadorPend;
-  concluida.textContent = contadorCon;
+  atualizarContadores();
 }
 
 button.addEventListener("click", () => {
@@ -88,7 +139,6 @@ button.addEventListener("click", () => {
   criarTarefa(nameTarefa.value);
   
 });
-
 
 btnTodos.addEventListener("click", () => {
   const itens = lista.querySelectorAll("li");
@@ -112,7 +162,7 @@ btnPendente.addEventListener("click", () => {
 
 btnConcluido.addEventListener("click", () => {
   const itens = lista.querySelectorAll("li");
-
+  
   itens.forEach((item) => {
     if (item.classList.contains("concluida")) {
       item.style.display = "block";
@@ -121,3 +171,5 @@ btnConcluido.addEventListener("click", () => {
     }
   });
 });
+
+adicionaTarefasSalvas();
